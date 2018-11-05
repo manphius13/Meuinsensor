@@ -1,0 +1,28 @@
+{
+  "name": "meuinsensor",
+  "version": "1.0.0",
+  "description": "meu trabalho do insensor",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon ./bin/www",
+    "start": "node ./bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manphius13/Meuinsensor.git"
+  },
+  "author": "Matheus de Oliveira",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/manphius13/Meuinsensor/issues"
+  },
+  "homepage": "https://github.com/manphius13/Meuinsensor#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "mssql": "^4.2.2",
+    "nodemon": "^1.18.6"
+  }
+}
