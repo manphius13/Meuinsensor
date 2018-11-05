@@ -1,16 +1,12 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
-var sql = require('mssql');
-var config =  require('./config')
+
 
 //Aqui incializa o express e salva na variável app
 var app = express();
 
-// conecção global
-sql.connect(config)
-    .then(conn => global.conn = conn)
-    .catch(err => console.log(err));
+
 
 //Define o ejs como view engine, e define a pasta VIEWS como a principal para html
 app.set('views', path.join(__dirname, 'views'));
