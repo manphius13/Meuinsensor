@@ -29,11 +29,12 @@ router.get('/create', function (req, res) {
 //Aqui é POST pois Recebe o formulário de cadastro para ser salvo no banco
 router.post('/create', function (req, res) {
 
-  let desc = req.body.desc;
+  let codigo = req.body.codigo;
+  console.log("oiiiki");
   let status = 0;
 
   //entra na conexão global e tem o comando sql
-  global.conn.request().query`insert into incubadora values(${status},${desc})`
+  global.conn.request().query`insert into incubadora values(${codigo},${status})`
     .then(resultado => {
       res.redirect('/incubadoras');
     }).catch(err => {
