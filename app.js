@@ -1,6 +1,10 @@
+var createError = require('http-errors');
 var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
+var cookieParser = require('cookie-parser');
+var passport = require('passport');
+var session = require('express-session');
 
 
 //Aqui incializa o express e salva na variável app
@@ -27,6 +31,10 @@ app.use('/',indexRouter);
 // Faz o arquivo incubadoras na pasta routes ficar disponível
 var incubadorasRouter= require('./router/incubadoras');
 app.use('/incubadoras', incubadorasRouter);
+
+// rota de usuarios
+var usersRouter = require('./router/users');
+app.use('/users',usersRouter);
 
 //Define que o servidor vai rodar no localhost:3000
 
