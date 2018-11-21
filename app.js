@@ -36,6 +36,9 @@ app.use('/incubadoras', incubadorasRouter);
 var usersRouter = require('./router/users');
 app.use('/users',usersRouter);
 
+var medicaoRouter = require('./router/medicao');
+app.use('/medicao', medicaoRouter);
+
 //Define que o servidor vai rodar no localhost:3000
 
 module.exports = app;
