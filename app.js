@@ -8,7 +8,7 @@ var session = require('express-session');
 
 
 //Aqui incializa o express e salva na variável app
-var app = express();
+const app = express();
 
 
 
@@ -36,8 +36,12 @@ app.use('/incubadoras', incubadorasRouter);
 var usersRouter = require('./router/users');
 app.use('/users',usersRouter);
 
+// rota das mediçoes
 var medicaoRouter = require('./router/medicao');
 app.use('/medicao', medicaoRouter);
+
+var recemNasc = require('./router/recemNasc');
+app.use('/recemNasc', recemNasc);
 
 //Define que o servidor vai rodar no localhost:3000
 

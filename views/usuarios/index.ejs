@@ -1,4 +1,4 @@
- 
+
 <!-- Inclui o layout do cabeçário-->
 <%- include('../headerLayout.ejs')%>
 
@@ -20,7 +20,7 @@
                 <!-- <th scope="row">1</th> -->
                 <td><b><%= data.nome %></b></td>
                 <td><%= data.email %></td>
-                <td><a href="#">Deletar</a></td>
+                <td><a href="/users/delete/<%=data.idUsuario%>">Deletar</a></td>
               </tr>
        <% } %>      
             </tbody>

@@ -21,9 +21,10 @@
             <input id="senha" type="password" name="senha">
         </div>
         <div class="form-group"> 
+            <span style="color:red" id="erroEmail"></span>
             <label for="email">Email:</label>
             <input id="email" type="email" name="email">
-            <span style="color:red" id="erroEmail"></span>
+           
         </div>
         
     </form>
@@ -64,7 +65,7 @@
                         }
                         // Caso já exista um email igual cadastrado
                         if(data.msg == 2){
-                            document.getElementById('erroEmail').innerHTML = "Este e-mail já existe em nossa base!"
+                            document.getElementById('erroEmail').innerHTML = "Email já existe em nossa base!"
                             document.getElementById('email').focus();
                         }
 
@@ -83,3 +84,13 @@
 
 
 <%- include('../footerLayout.ejs')%>
+
+
+
+<script>
+
+
+    for(data of incubadoras){
+        console.log(data.idIncubadora);
+    }
+</script>
