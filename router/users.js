@@ -44,7 +44,7 @@ router.post('/create', function (req, res, next) {
 
     // criptografa a senha
 
-    let senha = cryptb.encrypt(req.body.senha);
+    let senha = cryptr.encrypt(req.body.senha);
 
     let email = req.body.email;
 

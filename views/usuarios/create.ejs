@@ -49,7 +49,7 @@
      let dados = {nome:nome, email:email, senha: senha}
          
             
-            myHeaders = {"Content-Type": "application/json"};
+            let myHeaders = {"Content-Type": "application/json"};
 
              //Realiza a tentiva de login na rota
             fetch('/users/create',{method:'post',body:JSON.stringify(dados), headers : myHeaders }).then((response)=> {
