@@ -1,96 +1,82 @@
-<%- include('../headerLayout.ejs')%>
 
-<div class="row">
-    <div class="col-md-4">
-    <h4>Cadastro de Usuários</h4>
-    <hr>
-    <br>    
-    <form id="form" >
-            
-             <div>
-                <span style="color : blue" id="msg"></span>
-           </div>
-          
-         
-        <div class="form-group">
-            <label for="nome">Nome:</label>
-            <input id="nome" type="text" name="nome">
-        </div>
-        <div class="form-group">
-            <label for="senha">Senha:</label>
-            <input id="senha" type="password" name="senha">
-        </div>
-        <div class="form-group"> 
-            <span style="color:red" id="erroEmail"></span>
-            <label for="email">Email:</label>
-            <input id="email" type="email" name="email">
-           
-        </div>
-        
-    </form>
-        <div>         
-           
-        </div>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
 
-     <button onclick="cad()" class="btn btn-info">Cadastrar</button>
-    </div>
-    
-</div>
-
-
- <script>
-     function cad(){
-
-    //Obtem dados do formulário
-    let nome = document.getElementById('nome').value;
-    let  email = document.getElementById('email').value;
-    let senha = document.getElementById('senha').value;
-
-     let dados = {nome:nome, email:email, senha: senha}
-         
-            
-            myHeaders = {"Content-Type": "application/json"};
-
-             //Realiza a tentiva de login na rota
-            fetch('/users/create',{method:'post',body:JSON.stringify(dados), headers : myHeaders }).then((response)=> {
-
-
-                //Obtem a resposta da rota 
-				response.json().then(function (data) {
-                    
-                        // Caso esteja tudo validado
-                        if(data.msg == 1){
-                            document.getElementById('form').reset();
-                            document.getElementById('msg').innerHTML = "Usuário cadastrado com sucesso!"
-                        }
-                        // Caso já exista um email igual cadastrado
-                        if(data.msg == 2){
-                            document.getElementById('erroEmail').innerHTML = "Email já existe em nossa base!"
-                            document.getElementById('email').focus();
-                        }
-
-					
-				});
-			}).catch(function (err) {
-				console.error('Failed retrieving information', err);
-			});
-
-     }
-
-      $('#usuarios').addClass('active');
- </script>
-
-
-
-
-<%- include('../footerLayout.ejs')%>
-
+<input type="text" id="semana">
 
 
 <script>
 
 
-    for(data of incubadoras){
-        console.log(data.idIncubadora);
-    }
+let now = new Date().toLocaleDateString();
+
+console.log(now);
+
 </script>
+<script>
+
+$(function() {
+
+
+
+$("#semana").datepicker({
+
+    dateFormat: 'dd/mm/yy',
+        dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
+        dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+        dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+        monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+        monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+ 
+    // beforeShowDay: $.datepicker.noWeekends,
+    minDate: new Date(2018,11,22),
+	maxDate: new Date(2018,11,22),
+
+showAnim:'slideDown',
+
+showButtonPanel: true,
+
+numberOfMonths: 1,
+
+showWeek: true,
+
+
+
+});
+
+
+
+$(function() {
+
+
+
+$("#semana").datepicker("option", "onSelect",
+
+function(value, date)
+
+{ var week = $.datepicker.iso8601Week (
+
+new Date(date.selectedYear,
+
+date.selectedMonth,
+
+date.selectedDay));
+
+$(this).val((week<10?'0':'')+week);
+
+         
+
+}
+
+);
+
+
+
+});
+
+});
+</script>
+
+
+
