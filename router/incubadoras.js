@@ -29,7 +29,7 @@ router.get('/create', function (req, res) {
 //Aqui é POST pois Recebe o formulário de cadastro para ser salvo no banco
 router.post('/create', function (req, res) {
 
-  let codigo = req.body.codigo;
+  let codigo = req.body.desc;
   console.log("oiiiki");
   let status = 0;
 
