@@ -4,7 +4,7 @@ var router = express.Router();
 //GET obtem medicao da incubadora
 
 router.get('/', (req, res, next) => {
-    global.decodeURIComponent.request().query`select Top(1) temperatura, umidade from medicao order by IdMedicao desc;`
+    global.conn.request().query`select Top(1) temperatura, umidade from medicao order by IdMedicao desc;`
 
     .then(resultado => {
         res.json(resultado.recordset[0]);
