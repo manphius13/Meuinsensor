@@ -43,18 +43,18 @@
                     <div class="card-body">
                         <h4 class="card-title">Incubadora
                             <span class="float-right">
-                                <%= data.idIncubadora %>
+                                <%= data.IdIncubadora %>
                             </span>
                         </h4>
                         <p class="card-text">
-                            <form action="/incubadoras/details/<%= data.idIncubadora %>" method="GET">
+                            <form action="/incubadoras/details/<%= data.IdIncubadora %>" method="GET">
                                 <label>Descrição:</label>
-                                <%= data.descIncubadora %>
+                                <%= data.CodIncubadora %>
                                     <br />
 
 
                                     <label>Status:</label>
-                                    <% if(data.status == 1){%>
+                                    <% if(data.Status == 1){%>
                                         <b>Em uso</b>
                                         <br />
 
