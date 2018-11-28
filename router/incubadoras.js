@@ -5,7 +5,7 @@ var router = express.Router();
 //--------------------------------------------------------------------------------
 
 // Exibe uma lista de Incubadoras
-router.get('/', function (req, res) {
+router.get('/', ensureLoggedIn('/login?fail=true'), function (req, res) {
   //entra na conexão global e tem o comando sql
   global.conn.request().query`select * from incubadora`
     .then(result => {
@@ -98,6 +98,21 @@ router.get('/delete/:id', (req, res) => {
       console.log(err);
     })
 
+})
+
+router.post('/edit/:id', function (req,res,next){
+
+  global.conn.request().query`update incubadora set descIncubadora = ${desc} where idIncubadora = ${idIncubadora}`
+    .then(() => {
+      global.conn.request().query`select descIncubadora from incubadora where idIncubadora = ${idIncubadora}`
+        .then((resultado) => {
+          res.json(resultado.recordset[0]);
+        }).catch(err => {
+          console.loq(err);
+        })
+    }).catch(err =>{
+      console.log(err);
+    })
 })
 
 //-----------------------------------------------------------------------------------------------------
