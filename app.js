@@ -5,10 +5,14 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var passport = require('passport');
 var session = require('express-session');
+var cors = require('cors');
+
+require('./router/auth')(passport);
 
 
 //Aqui incializa o express e salva na variável app
 const app = express();
+app.use(cors());
 
 
 
@@ -25,8 +29,8 @@ app.use(express.static("./public"))
 
 
 // Faz o arquivo index na pasta routes ficar disponível
-var indexRouter = require('./router/index');
-app.use('/',indexRouter);
+var sessionRouter = require('./router/session');
+app.use('/',sessionRouter);
 
 // Faz o arquivo incubadoras na pasta routes ficar disponível
 var incubadorasRouter= require('./router/incubadoras');
@@ -44,5 +48,24 @@ var recemNasc = require('./router/recemNasc');
 app.use('/recemNasc', recemNasc);
 
 //Define que o servidor vai rodar no localhost:3000
+
+app.use(session({
+    secret: '123', //configura um seredo seu aqui
+    resave: false,
+    saveUninitialized: false,
+    cookie: {maxAge: 3600000}
+}));
+
+app.use(function (req,res,next){
+    next(createError(404));
+});
+
+app.use(function (err,req,res,next){
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+    res.status(err.status || 500);
+    res.render('error');
+});
 
 module.exports = app;
