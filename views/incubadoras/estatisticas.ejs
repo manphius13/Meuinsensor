@@ -1,12 +1,24 @@
 
     
  <script>
+	// data de internação
+	 let d = '<%=incubadora.date%>';
+	 var date = d.split("/");
+	 console.log(date);
+	 
+	 // Data atual	 
+	var atual = new Date();
+	var ano = atual.getFullYear();
+	var mes = atual.getMonth();
+	var dia = atual.getDate();
+	
     
     
 		//Obtem as estatisticas do dia selecionado no calendário
 		//--------------------------------------------------------------------------------------------------
 		function get_estatisticaDia(dia){
 			let dados = {dia: dia};
+			console.log(dados)
 				myHeaders = {"Content-Type": "application/json"};
 			fetch('/medicao/estatisticaDia/<%=incubadora.idIncubadora%>',{method:'post',body:JSON.stringify(dados), headers : myHeaders })
 			.then(function (response) {
@@ -102,8 +114,8 @@
                 monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
                 monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
  
-                minDate: new Date(2018,01,01),
-	            maxDate: new Date(2018,11,25),
+                minDate: new Date(date[2],date[1] - 1,date[0]),
+	            maxDate: new Date(ano,mes,dia),
 
 	            showAnim:'slideDown',
 
@@ -127,6 +139,8 @@
                 $("#dia").datepicker("option", "onSelect",
                     
                 function(value, date){
+					document.getElementById('semana').value = '';
+					document.getElementById('mes').value = '';
 			let ano = date.selectedYear;
 
 			let mes = date.selectedMonth + 1;
@@ -134,7 +148,7 @@
 			let dia = date.selectedDay;
 
 			data = ano+'-'+mes+'-'+dia;
-		
+					console.log(data);
 
 			get_estatisticaDia(data);
 			
@@ -150,7 +164,9 @@
 
 // Constroi calendário para seleção da semana
 //-------------------------------------------------------------------------------
-$(function() {		
+$(function() {	
+	
+
 		
 $("#semana").datepicker({
     orientation: 'top auto',
@@ -161,10 +177,10 @@ $("#semana").datepicker({
         dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
         monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
         monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
- 
-    // beforeShowDay: $.datepicker.noWeekends,
-    minDate: new Date(2018,01,01),
-	maxDate: new Date(2018,11,25),
+	
+	
+	minDate: new Date(date[2],date[1] -1,date[0]),
+	maxDate: new Date(ano,mes,dia),
 
 	showAnim:'slideDown',
 
@@ -193,6 +209,9 @@ $(function() {
 	$("#semana").datepicker("option", "onSelect",
 
 		function(value, date){
+
+			document.getElementById('semana').value = '';
+			document.getElementById('mes').value = '';
 			
 			let week = $.datepicker.iso8601Week (
 
@@ -232,8 +251,8 @@ $(function() {
                 monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
                 monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
 
-                   minDate: new Date(2018,01,01),
-	            maxDate: new Date(2018,11,25),
+                   minDate: new Date(date[2],date[1] - 1,date[0]),
+	            maxDate: new Date(ano,mes,dia),
                     
 	             showOn: "button",
 	
@@ -251,6 +270,9 @@ $(function() {
                 $("#mes").datepicker("option", "onSelect",
                     
                 function(value, date){
+
+					document.getElementById('semana').value = '';
+					document.getElementById('mes').value = '';
 
 			let ano = date.selectedYear;
 

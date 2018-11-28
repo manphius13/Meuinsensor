@@ -5,12 +5,15 @@ var router = express.Router();
 //--------------------------------------------------------------------------------
 
 // Exibe uma lista de Incubadoras
-router.get('/', ensureLoggedIn('/login?fail=true'), function (req, res) {
+router.get('/', function (req, res) {
   //entra na conexão global e tem o comando sql
   global.conn.request().query`select * from incubadora`
     .then(result => {
-      // renderiza view mandando o array com os registros do banco
-      res.render('incubadoras/index', { incubadoras: result.recordset });
+      if (req.query.success)
+      res.render('incubadoras/index', { incubadoras: result.recordset, mensagem:'Recém-Nascido Internado com Sucesso!' }); 
+    else
+      res.render('incubadoras/index', { incubadoras: result.recordset, mensagem: null });
+   
     }).catch(err => {
       console.dir(err);
     })

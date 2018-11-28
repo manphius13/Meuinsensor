@@ -2,39 +2,52 @@
 <!-- Inclui o layout do cabeçário-->
 <%- include('../headerLayout.ejs')%>
 
-<div class="row">
-    <!-- Aqui é feito o loop e vai listando os recem nascidos-->
-    <% for(data of recemNascidos){ %>
-
-        <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title"><%= data.nome %></h4>      
-                    <p class="card-text">
-                      
-                        <label>Código:</label>
-                        <b><%= data.idRecemNascido %></b>
-                        <br />
-                        <label>Sexo:</label>
-                        <b><%= data.sexo %></b>
-                        <br />
-                        <label>Mãe:</label>
-                        <b><%= data.nomeMae %></b>
-                        &nbsp
-                        <label>Pai:</label>
-                        <b><%= data.nomePai %></b>
-                        <br />
-                        
-
-                    </p>
-                </div>
-               
+ <% if(mensagem != null){%>
+        <div class="row">
+		    <div class="col-lg-12 col-md-12 mb-12" style="background:#81F7D8">
+             <span><%=mensagem%></span>
             </div>
         </div>
+    <%}%>
 
-
-    <% } %>
+<p> <a href="/recemNasc/create"> <i class="icon-plus-circled"></i>&ensp;Adicionar Novo Recém-Nascido</a> </p>           
+<div class="row">
+    <!-- Aqui é feito o loop e vai listando os usuários-->
+    
+        <table class="table table-striped">
+            <thead style="background:#2d3e50; color: whitesmoke">
+              <tr>
+                <th scope="col">DN</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Mãe</th>
+                <th scope="col">Opções</th>
+              </tr>
+            </thead>
+            <tbody>
+       <% for(data of recensNasc){ %>
+              <tr>
+                <!-- <th scope="row">1</th> -->
+                <td><b><%= data.idRecemNasc %></b></td>
+                <td><%= data.nome %></td>
+                <td><%= data.nomeMae %></td>
+                <td> <a href="/recemNasc/edit/<%=data.idRecemNasc%>"> Editar </a>||
+                    <a href="/recemNasc/details/<%=data.idRecemNasc%>">Detalhes</a> ||                   
+                    <a href="/recemNasc/delete/<%=data.idRecemNasc%>">Deletar</a></td>
+              </tr>
+       <% } %>      
+            </tbody>
+        </table>
+                                   
+    
 </div>
+
+<script>
+    $('#recemNasc').addClass('active');
+</script>
 
 <!-- Inclui o layout de rodapé-->
 <%- include('../footerLayout.ejs')%>
+
+
+
+  

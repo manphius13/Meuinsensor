@@ -1,82 +1,87 @@
+<!--Obtem data e hora atuais-->
+<% 
+   // Data atual	 
+	var atual = new Date();
+	var ano = atual.getFullYear();
+	var mes = atual.getMonth() + 1;
+  var dia = atual.getDate();
+  var data = ano+'-'+mes+'-'+dia;
 
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
-<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
-<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+ var hora = atual.getHours();	
+var minutos = atual.getMinutes();
 
-<input type="text" id="semana">
-
-
-<script>
-
-
-let now = new Date().toLocaleDateString();
-
-console.log(now);
-
-</script>
-<script>
-
-$(function() {
+var time = hora+':'+minutos;
+%>
 
 
 
-$("#semana").datepicker({
+<%- include('../headerLayout.ejs')%>
 
-    dateFormat: 'dd/mm/yy',
-        dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
-        dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
-        dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
-        monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-        monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
- 
-    // beforeShowDay: $.datepicker.noWeekends,
-    minDate: new Date(2018,11,22),
-	maxDate: new Date(2018,11,22),
-
-showAnim:'slideDown',
-
-showButtonPanel: true,
-
-numberOfMonths: 1,
-
-showWeek: true,
-
-
-
-});
-
-
-
-$(function() {
-
-
-
-$("#semana").datepicker("option", "onSelect",
-
-function(value, date)
-
-{ var week = $.datepicker.iso8601Week (
-
-new Date(date.selectedYear,
-
-date.selectedMonth,
-
-date.selectedDay));
-
-$(this).val((week<10?'0':'')+week);
-
+<div class="row">
+    <div class="col-md-6">
+    <h4>Cadastro de Recém-Nascidos</h4>
+    <hr>
+    <br>    
+    <form id="form" action="/recemNasc/create" method="post" >
+            
+             
+          
          
+        <div class="form-group">
+            <label for="nome">* Nome:</label>
+            <input id="nome" type="text" name="nome" required>
+        </div>
+        <div class="form-group">
+                <label for="group1">* Sexo:</label>
+            
+                <label>
+                  <input name="group1" type="radio" checked value="f"/>
+                  <span>F</span>
+                </label>
+              
+              
+                <label>
+                  <input name="group1" type="radio" value="m"/>
+                  <span>M</span>
+                </label>
+              
+        </div>
+        <div class="form-group"> 
+            <label for="date">* Data Nascimento:</label>
+            <input id="dateNasc" type="date" name="date" value="<%=data%>" required>           
+        </div>
+        <div class="form-group"> 
+                <label for="time">* Hora Nascimento:</label>
+                <input id="timeNasc" type="time" name="time" value="<%=time%>">           
+        </div>
+        <div class="form-group"> 
+                <label for="nomeMae">* Nome do Mãe:</label>
+                <input id="nomeMae" type="text" name="nomeMae" required>           
+        </div>
+        <div class="form-group"> 
+                <label for="nomePai">Nome do Pai:</label>
+                <input id="nomePai" type="text" name="nomePai">           
+        </div>
+      <button type="submit" class="btn btn-info">Cadastrar</button>
+    </form>
+   
+  <div>
+        
+    
+    </div>
+  </div>
+  
+    
+</div>
 
-}
 
-);
+ <script>
 
-
-
-});
-
-});
-</script>
+    
+      $('#recemNasc').addClass('active');
+ </script>
 
 
 
+
+<%- include('../footerLayout.ejs')%>
